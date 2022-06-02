@@ -21,3 +21,5 @@ const customErrorHandler = async(err, req, res, next) => {
             message: 'Unidentified Error'
         })
 }
+
+export default customErrorHandler

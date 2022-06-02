@@ -1,6 +1,7 @@
 import express from 'express'
 import dotenv from 'dotenv'
 import notFound from './middleware/not-found.js'
+import customErrorHandler from './middleware/custom-error-handler.js'
 
 dotenv.config()
 
@@ -15,7 +16,7 @@ app.get('/', (req, res) => {
 })
 
 app.use(notFound)
-app.c
+app.use(customErrorHandler)
 
 app.listen(port, () => {
     console.log(`Server Listening on Port ${port}`)
