@@ -4,6 +4,8 @@ import notFound from './middleware/not-found.js'
 import customErrorHandler from './middleware/custom-error-handler.js'
 import authRouter from './routes/auth'
 import jobsRouter from './routes/jobs'
+import knex from 'knex'
+import knexConfig from './knexfile'
 
 dotenv.config()
 
@@ -12,8 +14,6 @@ const app = express()
 const port = process.env.PORT
 
 app.use(express.json())
-
-// Connects
 
 // Routes
 app.use('/api/v1/auth', authRouter)
@@ -24,6 +24,7 @@ app.use(customErrorHandler)
 
 const startServer = async() => {
     try {
+        await connectDatabase()
         app.listen(port, () => {
             console.log(`Server Listening on Port ${port}`)
         })
