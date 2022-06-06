@@ -1,5 +1,13 @@
-const getAllJobs = (req, res) => {
-    res.send('Get All Jobs')
+import knex from "knex"
+import knexConfig from '../knexfile'
+import queryPromise from '../db/promises'
+
+const knexConnect = knex(knexConfig.development)
+
+const getAllJobs = async (req, res) => {
+    // res.send('Get All Jobs')
+    const result = await queryPromise(knexConnect().select('*').from('MsUser'))
+    res.send(result)
 }
 
 const getJob = (req, res) => {
