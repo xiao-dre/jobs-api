@@ -31,12 +31,12 @@ const register = async (req, res, next) => {
     res.status(httpStatusCodes.CREATED).json({token: token})
 }
 
-const login = async (req, res) => {
+const login = async (req, res, next) => {
     const { userName, userPassword } = req.body
     const userPasswordHash = crypto.createHash('sha256').update(userPassword, 'utf-8').digest('hex')
     const result = await queryPromise(kenxConnect().select('userName').where({userName: userName, userPasswordHash: userPasswordHash}).from('msuser'))
-    if(result == []) {
-        throw new UnauthenticatedError('Username or/and Password Invalid')
+    if(!result[0]) {
+        return next(new UnauthenticatedError('Username or/and Password Invalid'))
     }
     const token = jwt.sign({userName: userName, userPasswordHash: userPasswordHash}, process.env.JWT_SECRET, {expiresIn: '30d'})
     res.status(httpStatusCodes.ACCEPTED).json({token: token})
