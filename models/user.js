@@ -1,28 +1,34 @@
-import uuid from 'uuid'
+import { v4 as uuidv4 } from 'uuid'
 import crypto from 'crypto'
 
 const emailRegEx = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
 
 class UserModel {
-    constructor(userID, userName, userEmail, userUnhashedPassword) {
-        this.userID = userID, 
+    constructor(userName, userEmail, userPassword) {
+        this.userID = this.generateID(), 
         this.userName = userName, 
         this.userEmail = userEmail, 
-        this.userPasswordHash = userPasswordHash
+        this.userPasswordHash = this.hashPassword(userPassword)
     }
 
     isValid() {
-        if(!(this.userName && this.userName.length >= 4 && test.userName <= 20)) {
+        if(!this.userName || !(this.userName.length >= 4 && this.userName.length <= 20)) {
+            console.log('USERNAME')
             return 0
         }
-        if(!(this.userEmail.toLowerCase().match(emailRegEx))) {
+        if(!this.userEmail || !this.userEmail.toLowerCase().match(emailRegEx)) {
+            console.log('EMAIL')
+            return 0
+        }
+        if(!this.userPasswordHash) {
+            console.log('PASSWORD')
             return 0
         }
         return 1
     }
 
     generateID() {
-        return uuid.v4()
+        return uuidv4()
     }
 
     hashPassword(password) {
@@ -38,3 +44,5 @@ class UserModel {
         }
     }
 }
+
+export default ('User', UserModel)
