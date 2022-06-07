@@ -7,20 +7,24 @@ import queryPromise from '../db/promises'
 
 const kenxConnect = knex(knexConfig.development)
 
-const register = async (req, res) => {
-    const userData = req.body
+const register = async (req, res, next) => {
+    const { userName, userEmail, userPassword } = req.body
     let user
     try {
-        user = new User(userData.userName, userData.userEmail, userData.userPassword)
+        user = new User(userName, userEmail, userPassword)
     }
     catch(error) {
-        throw new BadRequestError('Credentials not valid')
+        return next(new BadRequestError('Credentials not valid'))
     }
     if(!user.isValid()) {
         throw new BadRequestError('Credentials not Valid')
     }
-    console.log(user.parseToJson())
-    await queryPromise(kenxConnect().insert(user.parseToJson()).into('msuser'))
+    try {
+        await queryPromise(kenxConnect().insert(user.parseToJson()).into('msuser'))
+    }
+    catch(error) {
+        return next(new BadRequestError('Username has been used'))
+    }
     res.status(httpStatusCodes.CREATED).json(user.parseToJson())
 }
 
