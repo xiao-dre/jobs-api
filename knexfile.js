@@ -9,7 +9,7 @@ export default {
             port: 3306, 
             user: 'sqluser', 
             password: process.env.MYSQL_PASSWORD, 
-            database: 'testDB'
+            database: 'jobsapi'
         }
     }
 }

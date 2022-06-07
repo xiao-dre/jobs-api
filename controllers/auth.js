@@ -1,8 +1,13 @@
 import httpStatusCodes from 'http-status-codes'
 import User from '../models/user'
 import { BadRequestError } from '../errors'
+import knex from 'knex'
+import knexConfig from '../knexfile'
+import queryPromise from '../db/promises'
 
-const register = (req, res) => {
+const kenxConnect = knex(knexConfig.development)
+
+const register = async (req, res) => {
     const userData = req.body
     let user
     try {
@@ -14,6 +19,8 @@ const register = (req, res) => {
     if(!user.isValid()) {
         throw new BadRequestError('Credentials not Valid')
     }
+    console.log(user.parseToJson())
+    await queryPromise(kenxConnect().insert(user.parseToJson()).into('msuser'))
     res.status(httpStatusCodes.CREATED).json(user.parseToJson())
 }
 
