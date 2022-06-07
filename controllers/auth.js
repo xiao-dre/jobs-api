@@ -4,6 +4,7 @@ import { BadRequestError } from '../errors'
 import knex from 'knex'
 import knexConfig from '../knexfile'
 import queryPromise from '../db/promises'
+import jwt from 'jsonwebtoken'
 
 const kenxConnect = knex(knexConfig.development)
 
@@ -17,7 +18,7 @@ const register = async (req, res, next) => {
         return next(new BadRequestError('Credentials not valid'))
     }
     if(!user.isValid()) {
-        throw new BadRequestError('Credentials not Valid')
+        return next(new BadRequestError('Credentials not Valid'))
     }
     try {
         await queryPromise(kenxConnect().insert(user.parseToJson()).into('msuser'))
@@ -25,7 +26,8 @@ const register = async (req, res, next) => {
     catch(error) {
         return next(new BadRequestError('Username has been used'))
     }
-    res.status(httpStatusCodes.CREATED).json(user.parseToJson())
+    const token = jwt.sign({userID: user.userID, userPasswordHash: user.userPasswordHash}, process.env.JWT_SECRET, {expiresIn: '30d'})
+    res.status(httpStatusCodes.CREATED).json({token: token})
 }
 
 const login = (req, res) => {
