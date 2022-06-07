@@ -10,11 +10,11 @@ const authentication = async(req, res, next) => {
     try {
         const token = authorization.split(' ')[1]
         const decodedToken = jwt.decode(token)
-        const { username, password } = decodedToken
-        const hashedPassword = crypto.createHash('sha256').update(password).digest('hex')
+        const { userName, userPassword } = decodedToken
+        const userPasswordHash = crypto.createHash('sha256').update(userPassword).digest('hex')
         req.body.user = {
-            username: username, 
-            password: hashedPassword
+            userName: userName, 
+            userPasswordHash: userPasswordHash
         }
         next()
     }
