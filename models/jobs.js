@@ -10,10 +10,10 @@ class JobModel {
     }
 
     isValid() {
-        if(!this.company || !(this.company <= 50)) {
+        if(!this.company || !(this.company.length <= 50)) {
             return 0
         }
-        if(!this.company || !(this.company <= 50)) {
+        if(!this.company || !(this.company.length <= 50)) {
             return 0
         }
         if(!this.status || !(this.status == 'interview' || this.status == 'declined')) {
