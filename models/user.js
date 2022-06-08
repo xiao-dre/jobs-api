@@ -13,15 +13,12 @@ class UserModel {
 
     isValid() {
         if(!this.userName || !(this.userName.length >= 4 && this.userName.length <= 20)) {
-            console.log('USERNAME')
             return 0
         }
         if(!this.userEmail || !this.userEmail.toLowerCase().match(emailRegEx)) {
-            console.log('EMAIL')
             return 0
         }
         if(!this.userPasswordHash) {
-            console.log('PASSWORD')
             return 0
         }
         return 1
