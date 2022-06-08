@@ -24,7 +24,6 @@ app.use(customErrorHandler)
 
 const startServer = async() => {
     try {
-        await connectDatabase()
         app.listen(port, () => {
             console.log(`Server Listening on Port ${port}`)
         })
