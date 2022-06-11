@@ -47,12 +47,22 @@ const updateJob = async(req, res, next) => {
     }
     let userID = await queryPromise(knexConnect('MsUser').select('UserID').where({userName: userName}))
     userID = userID[0].UserID
-    let job = await queryPromise(knexConnect('MsJob').where({jobID: jobID, userID: userID}).update({Company: company, Position: position}))
-    res.status(httpStatusCode.ACCEPTED).json(req.body)
+    await queryPromise(knexConnect('MsJob').where({jobID: jobID, userID: userID}).update({Company: company, Position: position}))
+    return res.status(httpStatusCode.ACCEPTED).json(req.body)
 }
 
-const deleteJob = (req, res) => {
-    res.send('Delete Job')
+const deleteJob = async(req, res, next) => {
+    const {userName} = req.body.user
+    const {jobID} = req.body
+    let userID = await queryPromise(knexConnect('MsUser').select('UserID').where({userName: userName}))
+    userID = userID[0].UserID
+    const result = await queryPromise(knexConnect('MsJob').where({JobID: jobID, UserID: userID}).del())
+    if(result == 1) {
+        return res.status(httpStatusCode.OK).json({success: true, data: req.body})
+    }
+    else {
+        return next(new BadRequestError('Job not found'))
+    }
 }
 
 export {
