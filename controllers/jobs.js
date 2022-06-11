@@ -9,7 +9,8 @@ const knexConnect = knex(knexConfig.development)
 
 const getAllJobs = async (req, res) => {
     const jobs = await queryPromise(knexConnect('MsJob').select('*'))
-    return res.status(httpStatusCode.ACCEPTED).json({jobs})
+    const count = jobs.length
+    return res.status(httpStatusCode.ACCEPTED).json({count: count, data: jobs})
 }
 
 const getJob = async(req, res, next) => {
