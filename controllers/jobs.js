@@ -8,9 +8,8 @@ import { BadRequestError } from "../errors"
 const knexConnect = knex(knexConfig.development)
 
 const getAllJobs = async (req, res) => {
-    // res.send('Get All Jobs')
-    const result = await queryPromise(knexConnect().select('*').from('MsUser'))
-    res.send(result)
+    const jobs = await queryPromise(knexConnect('MsJob').select('*'))
+    res.status(httpStatusCode.ACCEPTED).json({jobs})
 }
 
 const getJob = (req, res) => {
