@@ -17,7 +17,7 @@ const getJob = (req, res) => {
 }
 
 const createJob = async(req, res, next) => {
-    let userID = await queryPromise(knexConnect().select('UserID').from('MsUser').where({userName: req.body.user.userName}))
+    let userID = await queryPromise(knexConnect('MsUser').select('UserID').where({userName: req.body.user.userName}))
     userID = userID[0].UserID
     delete req.body.user.userPasswordHash
     req.body.user.userID = userID
@@ -27,7 +27,7 @@ const createJob = async(req, res, next) => {
         return next(new BadRequestError('Credentials not valid'))
     }
     
-    await queryPromise(knexConnect().into('MsJob').insert({JobID: job.jobID, company: job.company, position: job.position, status: job.status, userid: job.createdBy}))
+    await queryPromise(knexConnect('MsJob').insert({JobID: job.jobID, company: job.company, position: job.position, status: job.status, userid: job.createdBy}))
     return res.status(httpStatusCode.CREATED).json(req.body)
 } 
 

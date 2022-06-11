@@ -22,7 +22,7 @@ const register = async (req, res, next) => {
         return next(new BadRequestError('Credentials not Valid'))
     }
     try {
-        await queryPromise(kenxConnect().insert(user.parseToJson()).into('msuser'))
+        await queryPromise(kenxConnect('MsUser').insert(user.parseToJson()))
     }
     catch(error) {
         return next(new BadRequestError('Username has been used'))
@@ -34,7 +34,7 @@ const register = async (req, res, next) => {
 const login = async (req, res, next) => {
     const { userName, userPassword } = req.body
     const userPasswordHash = crypto.createHash('sha256').update(userPassword, 'utf-8').digest('hex')
-    const result = await queryPromise(kenxConnect().select('userName').where({userName: userName, userPasswordHash: userPasswordHash}).from('msuser'))
+    const result = await queryPromise(kenxConnect('MsUser').select('userName').where({userName: userName, userPasswordHash: userPasswordHash}))
     if(!result[0]) {
         return next(new UnauthenticatedError('Username or/and Password Invalid'))
     }
