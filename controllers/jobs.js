@@ -9,11 +9,19 @@ const knexConnect = knex(knexConfig.development)
 
 const getAllJobs = async (req, res) => {
     const jobs = await queryPromise(knexConnect('MsJob').select('*'))
-    res.status(httpStatusCode.ACCEPTED).json({jobs})
+    return res.status(httpStatusCode.ACCEPTED).json({jobs})
 }
 
-const getJob = (req, res) => {
-    res.send('Get job')
+const getJob = async(req, res, next) => {
+    const jobID = req.params.ID
+    const {userName} = req.body.user
+    let userID = await queryPromise(knexConnect('MsUser').select('UserID').where({userName: userName}))
+    userID = userID[0].UserID
+    const job = await queryPromise(knexConnect('MsJob').select('*').where({jobID: jobID, userID: userID}))
+    if(!job[0]) {
+        return next(new BadRequestError('Job ID with current user not found'))
+    }
+    return res.status(httpStatusCode.ACCEPTED).json({job})
 }
 
 const createJob = async(req, res, next) => {
