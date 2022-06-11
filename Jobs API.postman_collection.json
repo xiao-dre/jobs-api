@@ -1,0 +1,277 @@
+{
+	"info": {
+		"_postman_id": "863688f6-798f-4525-b380-75a330bb6206",
+		"name": "Jobs API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "17856588"
+	},
+	"item": [
+		{
+			"name": "getAllJobs",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmFtZSI6Ikxlb25lIEFiYmFjY2hpbyIsInVzZXJQYXNzd29yZEhhc2giOiIzNTA2ZTIyYjkxNzUxMTljZWUwMzkwZDNiZDBlMWRmNzk2NmY3NjExYzYxOGE2MzZlMzYwY2M4NDRjY2QyN2QxIiwiaWF0IjoxNjU0OTYyNzQ4LCJleHAiOjE2NTc1NTQ3NDh9.Klsnxmemzll2HaeHizg0EAQfU9JeNmQ-mI0IEKW4YAE",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/jobs/",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"jobs",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getJob",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmFtZSI6IkplYW4gUGllcnJlIFBvbG5hcmVmIiwidXNlclBhc3N3b3JkSGFzaCI6IjZmNGM4MWExNDk4NTUzMjRiMmIzZTViY2RiYzQwZTNkZjVmOWYzODc0ODU1NDkyN2Y4ZjY4Njg0YjUyOWZjMTQiLCJpYXQiOjE2NTQ5NjM0NTcsImV4cCI6MTY1NzU1NTQ1N30.UzdUJtD7HmQLPhDR7xNTIVVILpYBfaaEuXwXAjyGkCg",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/jobs/fe058f03-fa15-4f16-a9f6-b963fbf536ab",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"jobs",
+						"fe058f03-fa15-4f16-a9f6-b963fbf536ab"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "createJob",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmFtZSI6IkplYW4gUGllcnJlIFBvbG5hcmVmIiwidXNlclBhc3N3b3JkSGFzaCI6IjZmNGM4MWExNDk4NTUzMjRiMmIzZTViY2RiYzQwZTNkZjVmOWYzODc0ODU1NDkyN2Y4ZjY4Njg0YjUyOWZjMTQiLCJpYXQiOjE2NTQ5NjM0NTcsImV4cCI6MTY1NzU1NTQ1N30.UzdUJtD7HmQLPhDR7xNTIVVILpYBfaaEuXwXAjyGkCg",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"company\": \"Tokopedia\", \r\n    \"position\": \"CTO\",\r\n    \"status\": \"interview\" \r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/jobs/",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"jobs",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "updateJob",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmFtZSI6IkplYW4gUGllcnJlIFBvbG5hcmVmIiwidXNlclBhc3N3b3JkSGFzaCI6IjZmNGM4MWExNDk4NTUzMjRiMmIzZTViY2RiYzQwZTNkZjVmOWYzODc0ODU1NDkyN2Y4ZjY4Njg0YjUyOWZjMTQiLCJpYXQiOjE2NTQ5NjY1OTksImV4cCI6MTY1NzU1ODU5OX0.9Xyj2Kafo9SLaefEF3U_WxOoXI_oSU6xsGmprxSgPg0",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"jobID\": \"5ba26099-0ab8-4533-a637-fcc0a6a137cf\",\r\n    \"company\": \"Amazon\",\r\n    \"position\": \"CEO\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/jobs/",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"jobs",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "deleteJob",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmFtZSI6IkplYW4gUGllcnJlIFBvbG5hcmVmIiwidXNlclBhc3N3b3JkSGFzaCI6IjZmNGM4MWExNDk4NTUzMjRiMmIzZTViY2RiYzQwZTNkZjVmOWYzODc0ODU1NDkyN2Y4ZjY4Njg0YjUyOWZjMTQiLCJpYXQiOjE2NTQ5NjY1OTksImV4cCI6MTY1NzU1ODU5OX0.9Xyj2Kafo9SLaefEF3U_WxOoXI_oSU6xsGmprxSgPg0",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"jobID\": \"d5696c85-fb56-4ce5-92fb-cbdc12340486\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/jobs/",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"jobs",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "login",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"userName\": \"Jean Pierre Polnaref\", \r\n    \"userPassword\": \"333222111\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/auth/login",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "register",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"userName\": \"Jean Pierre Polnaref\", \r\n    \"userEmail\": \"jp.polnaref@gmail.com\",\r\n    \"userPassword\": \"333222111\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/auth/register",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"auth",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "notFound",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{URL}}/api/v1/test",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"test"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
