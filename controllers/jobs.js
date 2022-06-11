@@ -47,7 +47,8 @@ const updateJob = async(req, res, next) => {
     }
     let userID = await queryPromise(knexConnect('MsUser').select('UserID').where({userName: userName}))
     userID = userID[0].UserID
-    const job = await queryPromise(knexConnect('MsJob').where({jobID: jobID, userID: userID}).update({Company: company, Position: position}))
+    let job = await queryPromise(knexConnect('MsJob').where({jobID: jobID, userID: userID}).update({Company: company, Position: position}))
+    res.status(httpStatusCode.ACCEPTED).json(req.body)
 }
 
 const deleteJob = (req, res) => {
