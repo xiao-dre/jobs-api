@@ -39,8 +39,15 @@ const createJob = async(req, res, next) => {
     return res.status(httpStatusCode.CREATED).json(req.body)
 } 
 
-const updateJob = (req, res) => {
-    res.send('Update Job')
+const updateJob = async(req, res, next) => {
+    const { jobID, company, position } = req.body
+    const { userName } = req.body.user
+    if(company === '' || position === '') {
+        return next(new BadRequestError('Position or/and Company fields are empty'))
+    }
+    let userID = await queryPromise(knexConnect('MsUser').select('UserID').where({userName: userName}))
+    userID = userID[0].UserID
+    const job = await queryPromise(knexConnect('MsJob').where({jobID: jobID, userID: userID}).update({Company: company, Position: position}))
 }
 
 const deleteJob = (req, res) => {
